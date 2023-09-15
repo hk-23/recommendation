@@ -34,3 +34,9 @@ python manage.py createsuperuser
 email: hariesh@iamneo.ai
 user: neopat
 pass: neopat
+
+To run scripts 
+
+```sh
+python manage.py runscript <file_name>
+```
