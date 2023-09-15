@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+ 
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:600">
+
+    <style>
+
+        .hidden,
+
+        .hidden * {
+
+            pointer-events: none;
+
+            visibility: hidden;
+
+        }
+
+ 
+
+        .web-1920-1 {
+
+            background-color: var(--white);
+
+            align-items: flex-start;
+
+            display: flex;
+
+            width: 1920px;
+
+        }
+
+ 
+
+        .overlap-group {
+
+            height: 1888px;
+
+            position: relative;
+
+            width: 129px;
+
+        }
+
+ 
+
+        .my-report {
+
+            color: white;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 600;
+
+            font-weight: 600;
+
+            letter-spacing: 0;
+
+            line-height: 15px;
+
+            position: absolute;
+
+            width: 98px;
+
+            left: 31px;
+
+            top: 481px;
+
+        }
+
+ 
+
+        .icon-material-dashboard {
+
+            height: 49px;
+
+            object-fit: cover;
+
+            position: absolute;
+
+            top: 400px;
+
+            left: 45px;
+
+            width: 49px;
+
+        }
+
+ 
+
+        .chart-container {
+
+            margin-left: 200px; /* Add margin to create a 100-pixel distance */
+
+            margin-top: 100px;
+
+        }
+
+ 
+
+        .chart-container-1 {
+
+            margin-left: 200px; /* Add margin to create a 100-pixel distance */
+
+            margin-top: 100px;
+
+        }
+
+ 
+
+        .rectangle-178 {
+
+            background-color: #52459d;
+
+            border: 0px solid;
+
+            border-color: #787070;
+
+            height: 1080px;
+
+            left: 0;
+
+            position: static;
+
+            top: 0;
+
+            width: 127px;
+
+        }
+
+ 
+
+        /* Style for the buttons */
+
+        .button-container {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 500px; /* Adjust the margin as needed */
+
+            margin-left: -790px; /* Add margin to match the chart */
+
+            width: 800px; /* Adjust the width as needed */
+
+        }
+
+ 
+
+        .button {
+
+            background-color: #3498db;
+
+            color: white;
+
+            border: none;
+
+            padding: 2em;
+
+            cursor: pointer;
+
+            border-radius: 5px;
+
+            font-size: 16px;
+
+        }
+
+ 
+
+        /* Style for the new chart container */
+
+        .chart-container-2 {
+
+            margin-left: 200px; /* Add margin to create a 100-pixel distance */
+
+            margin-top: 100px;
+
+        }
+
+    </style>
+
+</head>
+
+ 
+
+<body>
+
+    <div class="web-1920-1 screen">
+
+        <div class="overlap-group">
+
+            <div class="rectangle-178"></div>
+
+            <img class="icon-material-dashboard" src="Icons\Repeat Grid 1.png" alt="Icon material-dashboard">
+
+        </div>
+
+        <div class="Language Performance chart-container">
+
+            <canvas id="myChart1"></canvas>
+
+        </div>
+
+        <div class="Language Performance chart-container-1">
+
+            <canvas id="myChart2"></canvas>
+
+        </div>
+
+        <div class="my-report">My Report</div>
+
+ 
+
+        <!-- Buttons -->
+
+        <div class="button-container">
+
+            <button class="button">C</button>
+
+            <button class="button">C ++</button>
+
+            <button class="button">Python</button>
+
+            <button class="button">Java</button>
+
+            <button class="button">DBMS</button>
+
+        </div>
+
+ 
+
+        <!-- New chart container -->
+
+        <div class="chart-container-2">
+
+            <canvas id="myChart3"></canvas>
+
+        </div>
+
+    </div>
+
+ 
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+ 
+
+    <script>
+
+        const ctx1 = document.getElementById('myChart1');
+
+        const ctx2 = document.getElementById('myChart2');
+
+        const ctx3 = document.getElementById('myChart3'); // New chart canvas
+
+ 
+
+        new Chart(ctx1, {
+
+            type: 'pie',
+
+            data: {
+
+                labels: ['C', 'C++', 'Python', 'Java', 'DBMS'],
+
+                datasets: [{
+
+                    label: '# of Votes',
+
+                    data: [12, 19, 3, 5, 2],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+ 
+
+        new Chart(ctx2, {
+
+            type: 'doughnut',
+
+            data: {
+
+                labels: ['C', 'C++', 'Python', 'Java', 'DBMS'],
+
+                datasets: [{
+
+                    label: '# of Votes',
+
+                    data: [8, 15, 6, 10, 12],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+ 
+
+        // New Chart
+
+        new Chart(ctx3, {
+
+            type: 'polarArea',
+
+            data: {
+
+                labels: ['C', 'C++', 'Python', 'Java', 'DBMS'],
+
+                datasets: [{
+
+                    label: 'Language',
+
+                    data: [8, 15, 6, 10, 12],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+ 
+
+</body>
+
+ 
+
+</html>
