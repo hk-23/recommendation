@@ -26,49 +26,106 @@
 
         <div class="card bg-light col-3">
             <div class="card-body text-left row">
-                <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div>
+                <div class="col-8">Skilled Language:</div><div class="col-4">{{ max_lang_used }}</div>
                 <div class="col-8">Accuracy:</div><div class="col-4">{{ accuracy|floatformat  }} %</div>
                 <div class="col-8">Solved:</div><div class="col-4">{{ solved  }}</div>
                 <!-- <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div> -->
             </div>
         </div>
 
-<!--         <div class="Language Performance my-4 px-6 chart-container-1 col-3">
+</section>
 
-            <canvas id="myChart2"></canvas>
+<section class="container-fluid my-6 text-center">
+    Topic Level Analysis 1
+</section>
 
-        </div> -->
+<section class="container-fluid row text-center d-flex align-items-center" >
 
-<!-- 
-        <div class="px-6 chart-container-1">
+    <!-- <div class="Language Performance px-6 chart-container col-3">
+        <canvas id="TopicChart1"></canvas>
+    </div> -->
+
+    <div class="Language Performance my-4 px-6 chart-container-1 col-3">
+
+        <canvas id="myChart2"></canvas>
+
+    </div>
+    
+    <div class="px-6 col-6 chart-container-1">
 
             <canvas id="myChart4"></canvas>
 
-        </div> -->
+    </div>
 
 
-                <!-- Buttons -->
-<!-- 
-        <div class="button-container">
-
-            <button class="button">C</button>
-
-            <button class="button">C ++</button>
-
-            <button class="button">Python</button>
-
-            <button class="button">Java</button>
-
-            <button class="button">DBMS</button>
-
-        </div> -->
-
+    <div class="card bg-light col-3">
+        <div class="card-body text-left row">
+            <div class="col-8">Skilled Topic:</div><div class="col-4">{{ max_lang_used }}</div>
+            <div class="col-8">Accuracy:</div><div class="col-4">{{ accuracy|floatformat  }} %</div>
+            <div class="col-8">Solved:</div><div class="col-4">{{ solved  }}</div>
+            <!-- <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div> -->
+        </div>
+    </div>
 
 </section>
 
 <section class="container-fluid my-6 text-center">
-    Topic Level Analysis
+    Career Recommendation
 </section>
+
+
+<section  class="container-fluid row text-center d-flex justify-content-center">
+
+    <div class="col-8 ">
+        <div class="row">
+    <div class="Language Performance my-4 p-6 chart-container-1 col-3">
+        <h2>HCL</h2>
+        <canvas id="doughnutChart1" width="100" height="100"></canvas>
+        <p>75%</p>
+    </div>
+
+    <div class="Language Performance my-4 p-6 chart-container-1 col-3">
+        <h2>TCS</h2>
+        <canvas id="doughnutChart2" width="100" height="100"></canvas>
+        <p>60%</p>
+    </div>
+
+    <div class="Language Performance my-4 p-6 chart-container-1 col-3">
+        <h2>Accenture</h2>
+        <canvas id="doughnutChart3" width="100" height="100"></canvas>
+        <p>50%</p>
+    </div>
+
+    <div class="Language Performance my-4 p-6 chart-container-1 col-3">
+        <h2>Amazon</h2>
+        <canvas id="doughnutChart4" width="100" height="100"></canvas>
+        <p>40%</p>
+    </div>
+
+    
+    </div>
+    </div>
+
+    <div class="chart-container">
+        
+    </div>
+    <div class="chart-container">
+        
+    </div>
+    <div class="chart-container">
+    </div>
+</div>
+</section>
+
+
+<section class="container-fluid my-6 text-center">
+    
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
 
     <script>
 
@@ -79,6 +136,8 @@
         const ctx3 = document.getElementById('myChart3'); 
 
         const ctx4 = document.getElementById('myChart4'); // New chart canvas
+
+        const mtx1 = document.getElementById('TopicChart1');
 
  
 
@@ -146,18 +205,18 @@
             data: {
 
                 labels: [
-                    {% for items in lang_data %}  
-                        "{{ items.language_used }}" ,
+                    {% for items in topic_data %}  
+                        "{{ items.ModuleName }}" ,
                     {% endfor %}
                 ],
 
                 datasets: [{
 
-                    label: '# of Votes',
+                    label: 'COD Attended',
 
                     data: [
-                        {% for items in lang_data %}  
-                            {{ items.Questions_Correct }} ,
+                        {% for items in topic_data %}  
+                            {{ items.attended }} ,
                         {% endfor %}
                     ],
 
@@ -288,8 +347,8 @@
             data: {
 
                 labels: [
-                    {% for items in lang_data %}  
-                        "{{ items.language_used }}" ,
+                    {% for items in topic_data %}  
+                        "{{ items.ModuleName }}" ,
                     {% endfor %}
                 ],
 
@@ -298,7 +357,7 @@
                     label: 'Attended',
 
                     data: [
-                        {% for items in lang_data %}  
+                        {% for items in topic_data %}  
                             {{ items.attended }} ,
                         {% endfor %}
                     ],
@@ -349,7 +408,114 @@
 
         });
 
+
+
+        // Topic wise Charts:
+
+        new Chart(mtx1, {
+
+            type: 'pie',
+
+            data: {
+
+                labels: [
+                    {% for items in lang_data %}  
+                        "{{ items.language_used }}" ,
+                    {% endfor %}
+                ],
+
+                datasets: [{
+
+                    label: 'COD Attended',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.Questions_Correct }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Activity Analysis - Correct',
+                        position: 'top' // You can specify 'top', 'left', 'right', or 'bottom'
+                    },
+                    datalabels: { // Configure the datalabels plugin
+                        display: true, // Show data labels by default
+                        color: 'white' // Set the color of the data labels
+                    },
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
     </script>
+
+
+
+    <script>
+    // Function to generate random colors
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Create doughnut chart data for each percentage with different random colors
+    function createDoughnutChart(canvasId, percentage) {
+        const data = {
+            datasets: [{
+                data: [percentage, 100 - percentage], // Percentage values
+                backgroundColor: [getRandomColor(), '#d3d3d3'], // Random color and gray
+            }]
+        };
+
+        new Chart(document.getElementById(canvasId), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            },
+        });
+    }
+
+    // Create doughnut charts
+    createDoughnutChart('doughnutChart1', 75);
+    createDoughnutChart('doughnutChart2', 60);
+    createDoughnutChart('doughnutChart3', 50);
+    createDoughnutChart('doughnutChart4', 40);
+    createDoughnutChart('doughnutChart5', 80);
+    createDoughnutChart('doughnutChart6', 65);
+    createDoughnutChart('doughnutChart7', 45);
+    createDoughnutChart('doughnutChart8', 30);
+    createDoughnutChart('doughnutChart9', 55);
+    createDoughnutChart('doughnutChart10', 70);
+</script>
 
 
 {% endblock %}

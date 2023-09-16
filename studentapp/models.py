@@ -48,3 +48,6 @@ class module_wise(models.Model):
 	testcase_passed = models.IntegerField(default=0)
 	no_of_testcases = models.IntegerField(default=0)
 	testcase_percentage = models.FloatField()	
+
+	def attended(self):
+		return self.Questions_Correct + self.Questions_wrong + self.Questions_skipped + self.Questions_partial_correct + self.Questions_not_viewed

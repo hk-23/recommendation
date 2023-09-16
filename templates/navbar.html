@@ -6,7 +6,7 @@
         <a href="#" class="navbar-brand">
             <img class="rounded-lg" src="{% static 'img/neohack.png' %}" alt="af logo" style="width: 50px;height: auto;">
         </a>
-        <span class="text-white lora">Neo Hack {{ user.user_type }}</span>
+        <span class="text-white lora">Neo Hack</span>
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#menubar" aria-label="navbar_toggler" >
             <span class="navbar-toggler-icon"></span>
@@ -25,12 +25,12 @@
                 {% endif %}
                 {% if user.user_type == 3 %}
                 <li class="nav-item px-3">
-                    <a href="{% url 'homepage' %}" class="nav-link
-                    {% if request.get_full_path == booknow %} active {% endif %}">Book Now</a>
+                    <a href="{% url 'landing_page' %}" class="nav-link
+                    {% if request.get_full_path == booknow %} active {% endif %}">Dashboard</a>
                 </li>
                 <li class="nav-item px-3">
-                    <a href="{% url 'homepage' %}" class="nav-link
-                    {% if request.get_full_path == mybookings %} active {% endif %}">My Bookings</a>
+                    <a href="{% url 'temp_page' %}" class="nav-link
+                    {% if request.get_full_path == mybookings %} active {% endif %}">Resume</a>
                 </li>
                 {% endif %}
                 {% if not user.is_authenticated %}
