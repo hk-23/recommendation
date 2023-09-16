@@ -26,9 +26,9 @@
 
         <div class="card bg-light col-3">
             <div class="card-body text-left row">
-                <div class="col-8">Skilled Language:</div><div class="col-4">{{ max_lang_used }}</div>
-                <div class="col-8">Accuracy:</div><div class="col-4">{{ accuracy|floatformat  }} %</div>
-                <div class="col-8">Solved:</div><div class="col-4">{{ solved  }}</div>
+                <div class="col-5">Skilled Lang</div> <div class="col-1">:</div> <div class="col-6">{{ max_lang_used }}</div>
+                <div class="col-5">Accuracy:</div><div class="col-1">:</div><div class="col-6">{{ accuracy|floatformat  }} %</div>
+                <div class="col-5">Solved:</div><div class="col-1">:</div><div class="col-6">{{ solved  }} Ques</div>
                 <!-- <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div> -->
             </div>
         </div>
@@ -60,9 +60,9 @@
 
     <div class="card bg-light col-3">
         <div class="card-body text-left row">
-            <div class="col-8">Skilled Topic:</div><div class="col-4">{{ max_lang_used }}</div>
-            <div class="col-8">Accuracy:</div><div class="col-4">{{ accuracy|floatformat  }} %</div>
-            <div class="col-8">Solved:</div><div class="col-4">{{ solved  }}</div>
+            <div class="col-5">Skilled Topic</div><div class="col-1">:</div><div class="col-6">{{ skilled_topic.topic }}</div>
+            <div class="col-5">Accuracy</div><div class="col-1">:</div><div class="col-6">{{ skilled_topic.accuracy|floatformat  }} %</div>
+            <div class="col-5">Solved</div><div class="col-1">:</div><div class="col-6">{{ skilled_topic.solved  }} Ques</div>
             <!-- <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div> -->
         </div>
     </div>
@@ -354,11 +354,11 @@
 
                 datasets: [{
 
-                    label: 'Attended',
+                    label: 'Easy',
 
                     data: [
                         {% for items in topic_data %}  
-                            {{ items.attended }} ,
+                            {{ items.Easy_correct_questions }} ,
                         {% endfor %}
                     ],
 
@@ -366,11 +366,23 @@
 
                 },{
 
-                    label: 'Correct',
+                    label: 'Medium',
 
                     data: [
-                        {% for items in lang_data %}  
-                            {{ items.Questions_Correct }} ,
+                        {% for items in topic_data %}  
+                            {{ items.medium_correct_questions }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                },{
+
+                    label: 'Hard',
+
+                    data: [
+                        {% for items in topic_data %}  
+                            {{ items.Hard_correct_questions }} ,
                         {% endfor %}
                     ],
 

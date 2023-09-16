@@ -37,7 +37,8 @@ class course_students(models.Model):
     # last_name = models.CharField(max_length=30)
 
 	id = models.BigIntegerField(primary_key=True)
-	c_id = models.UUIDField(default=uuid.uuid4,editable=True)
+	c_id = models.ForeignKey("courses",on_delete=models.CASCADE,default=None,null=True)
+	email = models.ForeignKey("usersapp.user",on_delete=models.CASCADE,default=None,null=True)
 	user_id = models.UUIDField(default=uuid.uuid4,editable=True)
 	badge = models.BigIntegerField(default=0)
 	superbadge = models.BigIntegerField(default=0)
@@ -105,5 +106,25 @@ class course_modules(models.Model):
 
 
 
+class company(models.Model):
+    # first_name = models.CharField(max_length=30)
+    # last_name = models.CharField(max_length=30)
+	# id = models.AutoField(primary_key=True, default=1)
+	company= models.CharField(max_length=50,null=True)
 
 
+class company_mapping(models.Model):
+    # first_name = models.CharField(max_length=30)
+    # last_name = models.CharField(max_length=30)
+	# id = models.AutoField(primary_key=True, default=1)
+	c_id= models.UUIDField(default=uuid.uuid4,editable=True)
+	c_name	= models.CharField(max_length=50,null=True)
+	company= models.ForeignKey("company",on_delete=models.CASCADE,default=None,null=True)
+
+
+class company_subtopic(models.Model):
+    # first_name = models.CharField(max_length=30)
+    # last_name = models.CharField(max_length=30)
+	# id = models.AutoField(primary_key=True, default=1)
+	company= models.ForeignKey("company",on_delete=models.CASCADE,default=None,null=True)
+	subTopic= models.CharField(max_length=50,null=True)

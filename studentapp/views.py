@@ -19,6 +19,15 @@ def landing_page(request):
 
 
 	topic_data = module_wise.objects.filter(email=user_obj).order_by('-Questions_Correct')[:5]
+
+
+	skilled_topic = max(topic_data, key=lambda x: x.attended())
+
+	st_attended = skilled_topic.attended
+	st_topic = skilled_topic.ModuleName
+	st_accuracy =skilled_topic.accuracy
+	st_solved = skilled_topic.Questions_Correct
+
 	
 	context = {
 		'lang_data': lang_data,
@@ -27,12 +36,22 @@ def landing_page(request):
 		'accuracy': max_accuracy,
 		'attended':max_questions_attended,
 		'solved': max_questions_solved,
+		'skilled_topic': {
+			'attended': st_attended,
+			'topic': st_topic,
+			'accuracy': st_accuracy,
+			'solved': st_solved
+		}
 	}
 	return render(request,'studentapp/dashboard.html',context=context)
 
 
 def show_temp(request):
 	return render(request,'temp.html')
+
+
+def my_courses(request):
+	return render(request,'studentapp/mycourses.html')
 
 
 # def landing_page(request):
