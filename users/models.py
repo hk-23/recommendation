@@ -87,3 +87,23 @@ class student_ppa_profiles(models.Model):
 	degree = models.CharField(max_length=50,null=True)
 	work_experience= models.IntegerField(null=True)
 
+class courses(models.Model):
+    # first_name = models.CharField(max_length=30)
+    # last_name = models.CharField(max_length=30)
+
+	c_id = models.UUIDField(primary_key=True)
+	c_name	= models.CharField(max_length=50,null=True)
+
+
+class course_modules(models.Model):
+    # first_name = models.CharField(max_length=30)
+    # last_name = models.CharField(max_length=30)
+	# id = models.AutoField(primary_key=True, default=1)
+	c_id = models.ForeignKey("courses",on_delete=models.CASCADE,default=None,null=True)
+	c_name	= models.CharField(max_length=50,null=True)
+	Module_name = models.CharField(max_length=50,null=True)
+
+
+
+
+
