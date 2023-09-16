@@ -52,6 +52,7 @@ def show_temp(request):
 
 def my_courses(request):
 	user_obj = User.objects.get(id=request.user.id)
+	
 	context = {
 		'user_obj': user_obj
 	}
