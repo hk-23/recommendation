@@ -3,4 +3,5 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(language_wise)
+mymodels=[language_wise,module_wise]
+admin.site.register(mymodels)

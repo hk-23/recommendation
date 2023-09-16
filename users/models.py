@@ -86,3 +86,4 @@ class student_ppa_profiles(models.Model):
 	current_backlogs = models.IntegerField(null=True)
 	degree = models.CharField(max_length=50,null=True)
 	work_experience= models.IntegerField(null=True)
+
