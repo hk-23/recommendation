@@ -1,4 +1,5 @@
 from studentapp.models import subtopic_wise
+from usersapp.models import User
 from datetime import datetime
 import csv
 
@@ -9,12 +10,12 @@ def run():
 
         for row in reader:
 
-
+            email_obj = User.objects.get(email = row[1])
 
             # print(dob)
             user = subtopic_wise(
                 user_id = row[0],
-                email =None,
+                email =email_obj,
                 subtopic_name = row[2],
                 student_marks = 0 if row[3]=='' else row[3],
                 total_marks = 0 if row[4]=='' else row[4],
