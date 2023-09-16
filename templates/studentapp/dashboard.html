@@ -4,7 +4,7 @@
 {% block content %}
 
 <section class="container-fluid py-4 text-center">
-    My Dashboard
+    My Core Competency
 </section>
 
 <section class="container-fluid row text-center d-flex align-items-center" >
@@ -25,16 +25,19 @@
         </div>
 
         <div class="card bg-light col-3">
-            <div class="card-body text-center">
-                <p class="card-text">Most used Language:  {{ max_lang_used }}</p>
+            <div class="card-body text-left row">
+                <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div>
+                <div class="col-8">Accuracy:</div><div class="col-4">{{ accuracy|floatformat  }} %</div>
+                <div class="col-8">Solved:</div><div class="col-4">{{ solved  }}</div>
+                <!-- <div class="col-8">Most used Language:</div><div class="col-4">{{ max_lang_used }}</div> -->
             </div>
         </div>
 
-        <div class="Language Performance my-4 px-6 chart-container-1 col-3">
+<!--         <div class="Language Performance my-4 px-6 chart-container-1 col-3">
 
             <canvas id="myChart2"></canvas>
 
-        </div>
+        </div> -->
 
 <!-- 
         <div class="px-6 chart-container-1">
@@ -61,6 +64,10 @@
         </div> -->
 
 
+</section>
+
+<section class="container-fluid my-6 text-center">
+    Topic Level Analysis
 </section>
 
     <script>
@@ -93,7 +100,7 @@
 
                     data: [
                         {% for items in lang_data %}  
-                            {{ items.attended }} ,
+                            {{ items.Questions_Correct }} ,
                         {% endfor %}
                     ],
 
@@ -107,7 +114,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Activity Analysis - Attended',
+                        text: 'Activity Analysis - Correct',
                         position: 'top' // You can specify 'top', 'left', 'right', or 'bottom'
                     },
                     datalabels: { // Configure the datalabels plugin
