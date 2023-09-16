@@ -51,7 +51,11 @@ def show_temp(request):
 
 
 def my_courses(request):
-	return render(request,'studentapp/mycourses.html')
+	user_obj = User.objects.get(id=request.user.id)
+	context = {
+		'user_obj': user_obj
+	}
+	return render(request,'studentapp/mycourses.html', context=context)
 
 
 # def landing_page(request):

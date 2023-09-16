@@ -51,6 +51,9 @@ class module_wise(models.Model):
 
 	def attended(self):
 		return self.Questions_Correct + self.Questions_wrong + self.Questions_skipped + self.Questions_partial_correct + self.Questions_not_viewed
+
+	def accuracy(self):
+		return (self.Questions_Correct / int(self.attended())) * 100
 	
 
 class subtopic_wise(models.Model):
@@ -74,3 +77,6 @@ class subtopic_wise(models.Model):
 
 	def attended(self):
 		return self.Questions_Correct + self.Questions_wrong + self.Questions_skipped + self.Questions_partial_correct + self.Questions_not_viewed
+
+	def accuracy(self):
+		return (self.Questions_Correct / int(self.attended())) * 100
