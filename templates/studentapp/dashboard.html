@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="container-fluid text-center d-flex align-items-center" style="height: 90vh;">
+
+        <div class="Language Performance chart-container">
+
+            <canvas id="myChart1"></canvas>
+
+        </div>
+
+        <div class="Language Performance chart-container-1">
+
+            <canvas id="myChart2"></canvas>
+
+        </div>
+
+        <!-- New chart container -->
+
+        <div class="chart-container-2">
+
+            <canvas id="myChart3"></canvas>
+
+        </div>
+
+
+                <!-- Buttons -->
+<!-- 
+        <div class="button-container">
+
+            <button class="button">C</button>
+
+            <button class="button">C ++</button>
+
+            <button class="button">Python</button>
+
+            <button class="button">Java</button>
+
+            <button class="button">DBMS</button>
+
+        </div> -->
+
+
+</section>
+
+    <script>
+
+        const ctx1 = document.getElementById('myChart1');
+
+        const ctx2 = document.getElementById('myChart2');
+
+        const ctx3 = document.getElementById('myChart3'); // New chart canvas
+
+ 
+
+        new Chart(ctx1, {
+
+            type: 'pie',
+
+            data: {
+
+                labels: [
+                    {% for items in lang_data %}  
+                        "{{ items.language_used }}" ,
+                    {% endfor %}
+                ],
+
+                datasets: [{
+
+                    label: '# of Votes',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.Questions_Correct }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+ 
+
+        new Chart(ctx2, {
+
+            type: 'doughnut',
+
+            data: {
+
+                labels: [
+                    {% for items in lang_data %}  
+                        "{{ items.language_used }}" ,
+                    {% endfor %}
+                ],
+
+                datasets: [{
+
+                    label: '# of Votes',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.Questions_Correct }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+ 
+
+        // New Chart
+
+        new Chart(ctx3, {
+
+            type: 'bar',
+
+            data: {
+
+                labels: [
+                    {% for items in lang_data %}  
+                        "{{ items.language_used }}" ,
+                    {% endfor %}
+                ],
+
+                datasets: [{
+
+                    label: 'Attended',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.attended }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                },{
+
+                    label: 'Correct',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.Questions_Correct }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+
+{% endblock %}
