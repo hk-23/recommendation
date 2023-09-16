@@ -10,7 +10,7 @@
 			<form method="POST">
 				{% csrf_token %}
 				{{ form|crispy }}
-				<input type="submit" value="Update" class="btn btn-slateblue">
+				<input type="submit" value="Update" class="btn btn- slateblue btn-outline-slateblue">
 				<a href="{% url 'homepage' %}" class="btn btn-secondary">Back To Home</a>
 			</form>
 			<a href="{% url 'homepage' %}" class="btn btn-outline-slateblue mt-4">Change Password</a>

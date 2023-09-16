@@ -3,27 +3,45 @@
 
 {% block content %}
 
-<section class="container-fluid text-center d-flex align-items-center" style="height: 90vh;">
+<section class="container-fluid py-4 text-center">
+    My Dashboard
+</section>
 
-        <div class="Language Performance chart-container">
+<section class="container-fluid row text-center d-flex align-items-center" >
+
+        <div class="Language Performance px-6 chart-container col-3">
 
             <canvas id="myChart1"></canvas>
 
         </div>
 
-        <div class="Language Performance chart-container-1">
+        <!-- New chart container -->
+
+
+        <div class="px-6 chart-container-2 col-6">
+
+            <canvas id="myChart3"></canvas>
+
+        </div>
+
+        <div class="card bg-light col-3">
+            <div class="card-body text-center">
+                <p class="card-text">Most used Language:  {{ max_lang_used }}</p>
+            </div>
+        </div>
+
+        <div class="Language Performance my-4 px-6 chart-container-1 col-3">
 
             <canvas id="myChart2"></canvas>
 
         </div>
 
-        <!-- New chart container -->
+<!-- 
+        <div class="px-6 chart-container-1">
 
-        <div class="chart-container-2">
+            <canvas id="myChart4"></canvas>
 
-            <canvas id="myChart3"></canvas>
-
-        </div>
+        </div> -->
 
 
                 <!-- Buttons -->
@@ -51,7 +69,9 @@
 
         const ctx2 = document.getElementById('myChart2');
 
-        const ctx3 = document.getElementById('myChart3'); // New chart canvas
+        const ctx3 = document.getElementById('myChart3'); 
+
+        const ctx4 = document.getElementById('myChart4'); // New chart canvas
 
  
 
@@ -69,11 +89,11 @@
 
                 datasets: [{
 
-                    label: '# of Votes',
+                    label: 'COD Attended',
 
                     data: [
                         {% for items in lang_data %}  
-                            {{ items.Questions_Correct }} ,
+                            {{ items.attended }} ,
                         {% endfor %}
                     ],
 
@@ -84,6 +104,17 @@
             },
 
             options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Activity Analysis - Attended',
+                        position: 'top' // You can specify 'top', 'left', 'right', or 'bottom'
+                    },
+                    datalabels: { // Configure the datalabels plugin
+                        display: true, // Show data labels by default
+                        color: 'white' // Set the color of the data labels
+                    },
+                },
 
                 scales: {
 
@@ -130,6 +161,17 @@
             },
 
             options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Activity Analysis - Correct',
+                        position: 'top' // You can specify 'top', 'left', 'right', or 'bottom'
+                    },
+                    datalabels: { // Configure the datalabels plugin
+                        display: true, // Show data labels by default
+                        color: 'white' // Set the color of the data labels
+                    },
+                },
 
                 scales: {
 
@@ -150,6 +192,89 @@
         // New Chart
 
         new Chart(ctx3, {
+
+            type: 'bar',
+
+            data: {
+
+                labels: [
+                    {% for items in lang_data %}  
+                        "{{ items.language_used }}" ,
+                    {% endfor %}
+                ],
+
+                datasets: [{
+
+                    label: 'Easy',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.Easy_correct_questions }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                },{
+
+                    label: 'Medium',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.medium_correct_questions }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                },{
+
+                    label: 'Hard',
+
+                    data: [
+                        {% for items in lang_data %}  
+                            {{ items.Hard_correct_questions }} ,
+                        {% endfor %}
+                    ],
+
+                    borderWidth: 1
+
+                }
+                ]
+
+            },
+
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Difficulty Level',
+                        position: 'top' // You can specify 'top', 'left', 'right', or 'bottom'
+                    },
+                    datalabels: { // Configure the datalabels plugin
+                        display: true, // Show data labels by default
+                        color: 'white' // Set the color of the data labels
+                    },
+                },
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+        // New Chart
+
+        new Chart(ctx4, {
 
             type: 'bar',
 
@@ -190,6 +315,18 @@
             },
 
             options: {
+
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Activity Analysis',
+                        position: 'top' // You can specify 'top', 'left', 'right', or 'bottom'
+                    },
+                    datalabels: { // Configure the datalabels plugin
+                        display: true, // Show data labels by default
+                        color: 'white' // Set the color of the data labels
+                    },
+                },
 
                 scales: {
 
