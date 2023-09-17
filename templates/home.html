@@ -8,7 +8,9 @@
 		<div class="col-md-12 text-center color-red-600">
 			<h1 class="text-cyan-500  patua" style="font-size: 400%;">Error 404</h1>
 			<h2 class="mb-3">Finally Found</h2>
-			<a href="{% url 'homepage' %}" class="btn btn-outline-slateblue mt-3 mx-2">Login</a>
+			{% if not user.is_authenticated %}
+			<a href="{% url 'login' %}" class="btn btn-outline-slateblue mt-3 mx-2">Login</a>
+			{% endif %}
 			<a class="btn bg-cyan-600 text-white mt-3 mx-2" href="{% url 'landing_page' %}">Get Hacked <i class="fas fa-bolt"></i> </a>
 		</div>
 	</div>

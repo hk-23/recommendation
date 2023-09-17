@@ -19,17 +19,17 @@
                 </li>
                 {% if user.user_type == 1 or user.user_type == 2 %}
                 <li class="nav-item px-3">
-                    <a href="{% url 'homepage' %}" class="nav-link
+                    <a href="{% url 'admin:index' %}" class="nav-link
                     {% if request.get_full_path == adminhome_url %} active {% endif %}">Admin</a>
                 </li>
                 {% endif %}
                 {% if user.user_type == 3 %}
                 <li class="nav-item px-3">
                     <a href="{% url 'landing_page' %}" class="nav-link
-                    {% if request.get_full_path == booknow %} active {% endif %}">Dashboard</a>
+                    {% if request.get_full_path == booknow %} active {% endif %}">My Report</a>
                 </li>
                 <li class="nav-item px-3">
-                    <a href="{% url 'temp_page' %}" class="nav-link
+                    <a href="{% url 'homepage' %}" class="nav-link
                     {% if request.get_full_path == mybookings %} active {% endif %}">Resume</a>
                 </li>
                 <li class="nav-item px-3">
