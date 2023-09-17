@@ -71,11 +71,16 @@
 <div class="web-1920-1 screen">
 <!-- Centered Horizontal Navigation Bar -->
 <div class="navbar">
+
+{% for i in final_cr %}
+    <a onclick="toggleChart('my-{{ i.comp }}')">{{ i.comp }}</a>
+{% endfor %}
+<!-- 
 <a onclick="toggleChart('myChartC')">C</a>
 <a onclick="toggleChart('myChartCpp')">C++</a>
 <a onclick="toggleChart('myChartJava')">Java</a>
 <a onclick="toggleChart('myChartPython')">Python</a>
-<a onclick="toggleChart('myChartDBMS')">DBMS</a>
+<a onclick="toggleChart('myChartDBMS')">DBMS</a> -->
 <!-- Add other navigation items here -->
 </div>
 
@@ -83,6 +88,14 @@
 
     <!-- Your existing content here -->
 <!-- Chart Containers -->
+
+{% for i in final_cr %}
+    <div class="chart-container" id="my-{{ i.comp }}">
+        <canvas id="doughnutChart1" width="100" height="100"></canvas>
+        <!-- <canvas id="{{ i.comp }}"></canvas> -->
+    </div>
+{% endfor %}
+<!-- 
 <div class="chart-container" id="myChartC">
 <canvas id="chartC"></canvas>
 </div>
@@ -97,8 +110,57 @@
 </div>
 <div class="chart-container" id="myChartDBMS">
 <canvas id="chartDBMS"></canvas>
-</div>
+</div> -->
+
 <!-- Add other chart containers here -->
+
+
+    <script>
+    // Function to generate random colors
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // Create doughnut chart data for each percentage with different random colors
+    function createDoughnutChart(canvasId, percentage) {
+        
+        const data = {
+            datasets: [{
+                data: [percentage, 100 - percentage], // Percentage values
+                backgroundColor: [getRandomColor(), '#d3d3d3'], // Random color and gray
+            }]
+        };
+
+        new Chart(document.getElementById(canvasId), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            },
+        });
+    }
+
+    // // Create doughnut charts
+    // createDoughnutChart('chart{{ i.comp }}', 75);
+    createDoughnutChart('doughnutChart1', 60);
+    // createDoughnutChart('doughnutChart3', 50);
+    // createDoughnutChart('doughnutChart4', 40);
+    // createDoughnutChart('doughnutChart5', 80);
+    // createDoughnutChart('doughnutChart6', 65);
+    // createDoughnutChart('doughnutChart7', 45);
+    // createDoughnutChart('doughnutChart8', 30);
+    // createDoughnutChart('doughnutChart9', 55);
+    // createDoughnutChart('doughnutChart10', 70);
+</script>
 
  
 
@@ -110,6 +172,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
         // Chart data and options for C
+
         const chartDataC = {
             labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5', 'Label 6', 'Label 7', 'Label 8', 'Label 9', 'Label 10'],
             datasets: [{

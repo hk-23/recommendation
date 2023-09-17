@@ -2,6 +2,7 @@ from django.shortcuts import render
 from usersapp.decorators import *
 from .models import *
 from usersapp.models import *
+from users.models import *
 
 # Create your views here.
 
@@ -28,6 +29,28 @@ def landing_page(request):
 	st_accuracy =skilled_topic.accuracy
 	st_solved = skilled_topic.Questions_Correct
 
+
+	# Company Based Course Recommendation:
+
+	cr = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("-accuracy")
+	cr_top = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("-accuracy")[:3]
+	cr_bot = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("accuracy")[:3]
+
+	total_comp = len(cr)
+
+	if total_comp > 5:
+		final_cr = cr_top | cr_bot
+	elif total_comp > 3:
+		final_cr = cr_top | company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("accuracy")[:(total_comp-3)]
+	else:
+		final_cr = cr_top
+
+	for com in final_cr:
+		com.recm_courses = company_mapping.objects.filter(company=com.company)[:3]
+
+		com.topic_to_look = company_subtopic.objects.filter(company=com.company)[:5]
+
+
 	
 	context = {
 		'lang_data': lang_data,
@@ -41,20 +64,45 @@ def landing_page(request):
 			'topic': st_topic,
 			'accuracy': st_accuracy,
 			'solved': st_solved
-		}
+		},
+		'final_cr': final_cr
 	}
 	return render(request,'studentapp/dashboard.html',context=context)
 
 
 def show_temp(request):
-	return render(request,'temp.html')
+
+	user_obj = User.objects.get(id=request.user.id)
+
+	# Company Based Course Recommendation:
+
+	cr = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("-accuracy")
+	cr_top = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("-accuracy")[:3]
+	cr_bot = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("accuracy")[:3]
+
+	total_comp = len(cr)
+
+	if total_comp > 5:
+		final_cr = cr_top | cr_bot
+	elif total_comp > 3:
+		final_cr = cr_top | company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("accuracy")[:(total_comp-3)]
+	else:
+		final_cr = cr_top
+
+	
+	context = {
+	
+		'final_cr': final_cr
+	}
+	return render(request,'temp.html',context=context)
 
 
 def my_courses(request):
-	user_obj = User.objects.get(id=request.user.id)
-	
+	courses_enrolled = course_students.objects.filter(email=request.user.id)	
+	# cr = company_recommendation.objects.filter(email=user_obj,attended__gt=20,total_topics__gt=1).order_by("-accuracy")
+
 	context = {
-		'user_obj': user_obj
+		'courses_enrolled': courses_enrolled
 	}
 	return render(request,'studentapp/mycourses.html', context=context)
 

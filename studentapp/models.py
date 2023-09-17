@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from users.models import company
 
 # Create your models here.
 	
@@ -80,3 +81,13 @@ class subtopic_wise(models.Model):
 
 	def accuracy(self):
 		return (self.Questions_Correct / int(self.attended())) * 100
+
+
+class company_recommendation(models.Model):
+	email = models.ForeignKey("usersapp.user",on_delete=models.CASCADE,default=None,null=True)
+	company = models.ForeignKey("users.company",on_delete=models.CASCADE,default=None,null=True)
+	comp = models.CharField(max_length=100,default=None)
+	total_topics = models.IntegerField(default=0)
+	Questions_Correct = models.IntegerField(default=0)
+	attended = models.IntegerField(default=0)
+	accuracy = models.FloatField()
