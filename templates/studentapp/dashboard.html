@@ -84,7 +84,7 @@
         <div class="container-fluid row shadow-lg mb-5">
             <div class="Language Performance my-4 p-6 chart-container-1 col-2">
                 <br>
-                <h2><strong>{{ c.comp }} - {{ c.accuracy }} % </strong></h2>
+                <h2><strong>{{ c.comp }} - {{ c.accuracy|floatformat }} % </strong></h2>
                 <br>
                 <canvas id="{{ c.comp }}" width="100" height="100"></canvas>
             </div>

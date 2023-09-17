@@ -1,420 +1,207 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:600">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<title>Common Resume</title>
 <style>
-        /* Your existing CSS styles */
-        /* Add your CSS styles here */
-        .button-container {
+        /* CSS styling for the resume */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            size: A4;
+        }
+
+ 
+
+        .container {
+            max-width: 794px; /* A4 width in pixels */
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
             display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
         }
-        .button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .content {
-            margin-top: 20px;
-        }
-        .card {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }
-        /* Updated styles for chart containers */
-        .chart-container {
-            display: none; /* Initially hide the chart container */
-            margin-top: 20px;
-            width: 600px; /* Increase the width for a larger chart */
-            height: 400px; /* Increase the height for a larger chart */
-        }
-        /* Center the navigation bar horizontally */
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            text-align: center; /* Center the text horizontally */
-        }
-        .navbar a {
-            display: inline-block; /* Display links inline */
-            color: white;
+
+ 
+
+        header {
             text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            cursor: pointer;
+            margin-bottom: 20px;
         }
-        /* Style specific links with white color */
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
+
+ 
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #007bff;
         }
-        /* Style C, C++, Java, and Python links with white color */
-        .navbar a:nth-child(1),
-        .navbar a:nth-child(2),
-        .navbar a:nth-child(3),
-        .navbar a:nth-child(4),
-        .navbar a:nth-child(5) {
-            color: white;
+
+ 
+
+        .col-sm-3 {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+ 
+
+        .col-sm-6 {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+ 
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+ 
+
+        p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+ 
+
+        section {
+            padding: 10px;
+            width: 100%;
+        }
+
+ 
+
+        h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+ 
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+ 
+
+        li {
+            margin-bottom: 5px;
+        }
+
+ 
+
+        .certification {
+            font-style: italic;
+            color: #777;
+            font-size: 14px;
+            opacity: 0.5;
+            align-self: flex-end;
+            margin-top: auto;
+        }
+
+ 
+
+        /* Styling for colorful progress bars */
+        .progress-bar {
+            height: 10px; /* Reduced the height */
+            border-radius: 5px; /* Reduced the border radius */
+            margin-bottom: 5px;
+            width: 100%;
+            background-color: #e74c3c; /* Red color for the progress bar */
+        }
+
+ 
+
+        .progress {
+            height: 100%;
+            border-radius: 5px; /* Reduced the border radius */
+            background-color: #007bff; /* Blue color for the progress */
+        }
+
+ 
+
+        /* Styling for star ratings */
+        .star {
+            color: #f1c40f; /* Yellow color for stars */
         }
 </style>
 </head>
 <body>
-<div class="web-1920-1 screen">
-<!-- Centered Horizontal Navigation Bar -->
-<div class="navbar">
-
-{% for i in final_cr %}
-    <a onclick="toggleChart('my-{{ i.comp }}')">{{ i.comp }}</a>
-{% endfor %}
-<!-- 
-<a onclick="toggleChart('myChartC')">C</a>
-<a onclick="toggleChart('myChartCpp')">C++</a>
-<a onclick="toggleChart('myChartJava')">Java</a>
-<a onclick="toggleChart('myChartPython')">Python</a>
-<a onclick="toggleChart('myChartDBMS')">DBMS</a> -->
-<!-- Add other navigation items here -->
+<div class="container">
+<header>
+<img src="{% static 'img/profile.png' %}" alt="Profile Picture" class="profile-pic">
+<h1>{{ user_domain_obj.student_name }}</h1>
+</header>
+<div class="col-sm-3">
+<section>
+<h2>Personal Info</h2>
+<p>{{ user.email }} </p>
+<p>{{ user_domain_obj.phone }}</p>
+<p>{{ user_domain_obj.roll_no }}</p>
+</section>
+<section>
+<h2>Academic Information</h2>
+<ul>
+<li>{{ user_domain_obj.degree }}</li>
+<li>{{ user_domain_obj.branch_name }}</li>
+<li>Graduated: {{ user_domain_obj.batch }}</li>
+</ul>
+</section>
 </div>
+<div class="col-sm-6">
+<section>
+<h2>Suggestion/Objective</h2>
 
- 
-
-    <!-- Your existing content here -->
-<!-- Chart Containers -->
-
-{% for i in final_cr %}
-    <div class="chart-container" id="my-{{ i.comp }}">
-        <canvas id="doughnutChart1" width="100" height="100"></canvas>
-        <!-- <canvas id="{{ i.comp }}"></canvas> -->
-    </div>
-{% endfor %}
-<!-- 
-<div class="chart-container" id="myChartC">
-<canvas id="chartC"></canvas>
+<p>Highly motivated software developer with a strong foundation in Java, Python, and C++. Proven ability in problem-solving and algorithm design. Completed numerous coding assessments with a consistent score of 90% or higher. Graduated with a Bachelor of Science in Computer Science from the University of Excellence in May 2023. Seeking opportunities to apply and further enhance my skills in a challenging software development role.</p>
+</section>
+<section>
+<h2>Programming Skills</h2>
+<ul>
+<li><span class="highlight">Java</span> - Proficient </li>
+<li><span class="highlight">{{ max_lang_used }}</span> - Advanced </li>
+<li><span class="highlight">C++</span> - Intermediate</li>
+<!-- Add more skills dynamically based on the user's data -->
+</ul>
+</section>
+<section>
+<h2>Coding Skill Ratings</h2>
+<ul>
+<li>Problem Solving: <span class="star">&#9733;&#9733;&#9733;&#9733;&#9734;</span></li>
+<li>Algorithm Design: <span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span></li>
+<li>Data Structures: <span class="star">&#9733;&#9733;&#9733;&#9733;&#9734;</span></li>
+<!-- Add more ratings dynamically based on the user's data -->
+</ul>
+</section>
+<section>
+<h2>Coding Capacity</h2>
+<div class="progress-bar">
+<div class="progress" style="width: 90%;"></div>
 </div>
-<div class="chart-container" id="myChartCpp">
-<canvas id="chartCpp"></canvas>
+<p>Completed over 50 coding assessments with an average score of 90%.</p>
+</section>
 </div>
-<div class="chart-container" id="myChartJava">
-<canvas id="chartJava"></canvas>
 </div>
-<div class="chart-container" id="myChartPython">
-<canvas id="chartPython"></canvas>
-</div>
-<div class="chart-container" id="myChartDBMS">
-<canvas id="chartDBMS"></canvas>
-</div> -->
-
-<!-- Add other chart containers here -->
-
-
-    <script>
-    // Function to generate random colors
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    // Create doughnut chart data for each percentage with different random colors
-    function createDoughnutChart(canvasId, percentage) {
-        
-        const data = {
-            datasets: [{
-                data: [percentage, 100 - percentage], // Percentage values
-                backgroundColor: [getRandomColor(), '#d3d3d3'], // Random color and gray
-            }]
-        };
-
-        new Chart(document.getElementById(canvasId), {
-            type: 'doughnut',
-            data: data,
-            options: {
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                },
-            },
-        });
-    }
-
-    // // Create doughnut charts
-    // createDoughnutChart('chart{{ i.comp }}', 75);
-    createDoughnutChart('doughnutChart1', 60);
-    // createDoughnutChart('doughnutChart3', 50);
-    // createDoughnutChart('doughnutChart4', 40);
-    // createDoughnutChart('doughnutChart5', 80);
-    // createDoughnutChart('doughnutChart6', 65);
-    // createDoughnutChart('doughnutChart7', 45);
-    // createDoughnutChart('doughnutChart8', 30);
-    // createDoughnutChart('doughnutChart9', 55);
-    // createDoughnutChart('doughnutChart10', 70);
-</script>
-
- 
-
-    <!-- Bootstrap JavaScript for collapsible elements -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Your JavaScript for Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-        // Chart data and options for C
-
-        const chartDataC = {
-            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5', 'Label 6', 'Label 7', 'Label 8', 'Label 9', 'Label 10'],
-            datasets: [{
-                label: 'Percentage Scored',
-                data: [8, 12, 6, 20, 7, 15, 10, 18, 25, 30], // Update data for 10 labels
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1
-            }]
-        };
-
- 
-
-        // Chart data and options for C++
-        const chartDataCpp = {
-            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5', 'Label 6', 'Label 7', 'Label 8', 'Label 9', 'Label 10'],
-            datasets: [{
-                label: 'Percentage Scored',
-                data: [15, 10, 18, 25, 30, 12, 6, 20, 7, 8], // Update data for 10 labels
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1
-            }]
-        };
-
- 
-
-        // Chart data and options for Java
-        const chartDataJava = {
-            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5', 'Label 6', 'Label 7', 'Label 8', 'Label 9', 'Label 10'],
-            datasets: [{
-                label: 'Percentage Scored',
-                data: [30, 25, 18, 12, 6, 20, 7, 8, 15, 10], // Update data for 10 labels
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1
-            }]
-        };
-
- 
-
-        // Chart data and options for Python
-        const chartDataPython = {
-            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5', 'Label 6', 'Label 7', 'Label 8', 'Label 9', 'Label 10'],
-            datasets: [{
-                label: 'Percentage Scored',
-                data: [40, 35, 28, 22, 16, 30, 15, 12, 20, 18], // Update data for 10 labels
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1
-            }]
-        };
-
- 
-
-        // Chart data and options for DBMS
-        const chartDataDBMS = {
-            labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5', 'Label 6', 'Label 7', 'Label 8', 'Label 9', 'Label 10'],
-            datasets: [{
-                label: 'Percentage Scored',
-                data: [38, 32, 26, 18, 14, 30, 12, 10, 22, 20], // Update data for 10 labels
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1
-            }]
-        };
-
- 
-
-        const chartOptions = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
- 
-
-        // Create and hide the chart containers initially
-        const chartC = new Chart(document.getElementById('chartC'), {
-            type: 'bar',
-            data: chartDataC,
-            options: chartOptions
-        });
-
- 
-
-        const chartCpp = new Chart(document.getElementById('chartCpp'), {
-            type: 'bar',
-            data: chartDataCpp,
-            options: chartOptions
-        });
-
- 
-
-        const chartJava = new Chart(document.getElementById('chartJava'), {
-            type: 'bar',
-            data: chartDataJava,
-            options: chartOptions
-        });
-
- 
-
-        const chartPython = new Chart(document.getElementById('chartPython'), {
-            type: 'bar',
-            data: chartDataPython,
-            options: chartOptions
-        });
-
- 
-
-        const chartDBMS = new Chart(document.getElementById('chartDBMS'), {
-            type: 'bar',
-            data: chartDataDBMS,
-            options: chartOptions
-        });
-
- 
-
-        // Function to toggle chart visibility
-        function toggleChart(chartId) {
-            const chartContainers = document.querySelectorAll('.chart-container');
-            chartContainers.forEach(container => {
-                if (container.id === chartId) {
-                    container.style.display = 'block';
-                } else {
-                    container.style.display = 'none';
-                }
-            });
-        }
-</script>
-</div>
+<p class="certification">iamneo certified during the academic year of 2020 - 2024</p>
 </body>
-</html>
+</html> 

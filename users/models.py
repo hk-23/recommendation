@@ -30,6 +30,9 @@ class users_domain(models.Model):
 	degree_id = models.UUIDField(default=uuid.uuid4,null=True,editable=True)
 	degree = models.CharField(max_length=50,null=True)
 
+	def student_name(self):
+		return (self.name.replace("$"," "))
+
 
 
 class course_students(models.Model):
