@@ -24,4 +24,11 @@ urlpatterns = [
     path('',home,name="homepage"),
     path('accounts/',include('usersapp.urls')),
     path('student/',include('studentapp.urls')),
+
 ]
+
+
+handler404 = 'usersapp.views.error_404'
+handler500 = 'usersapp.views.error_500'
+handler403 = 'usersapp.views.error_403'
+handler400 = 'usersapp.views.error_400'

@@ -70,7 +70,7 @@ def landing_page(request):
 	return render(request,'studentapp/dashboard.html',context=context)
 
 
-def show_temp(request):
+def show_resume(request):
 
 	user_obj = User.objects.get(id=request.user.id)
 
@@ -124,7 +124,11 @@ def show_temp(request):
 		'max_lang_used': max_lang_used,
 		'user_domain_obj': user_domain_obj
 	}
-	return render(request,'temp.html',context=context)
+	return render(request,'studentapp/resume.html',context=context)
+
+def show_temp(request):
+	context = {}
+	return render(request,"temp.html",context=context)
 
 
 def my_courses(request):

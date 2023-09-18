@@ -1,207 +1,551 @@
-{% load static %}
-
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Common Resume</title>
-<style>
-        /* CSS styling for the resume */
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Officer's Report</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Add Font Awesome CSS link -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
+    <style>
+
+        
+
         body {
+
             font-family: Arial, sans-serif;
+
             background-color: #f4f4f4;
+
             margin: 0;
+
             padding: 0;
-            color: #333;
-            size: A4;
-        }
 
- 
-
-        .container {
-            max-width: 794px; /* A4 width in pixels */
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
 
- 
-
-        header {
             text-align: center;
-            margin-bottom: 20px;
+
         }
 
  
 
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #007bff;
+        #sidebar {
+
+            width: 60px;
+
+            background-color: #333;
+
+            color: #fff;
+
+            padding: 20px;
+
+            flex-shrink: 0;
+
         }
 
  
 
-        .col-sm-3 {
-            background-color: #f2f2f2;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
+        #sidebar ul {
 
- 
+            list-style: none;
 
-        .col-sm-6 {
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
- 
-
-        h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #007bff;
-        }
-
- 
-
-        p {
-            margin: 0;
-            font-size: 18px;
-        }
-
- 
-
-        section {
-            padding: 10px;
-            width: 100%;
-        }
-
- 
-
-        h2 {
-            font-size: 20px;
-            color: #333;
-        }
-
- 
-
-        ul {
-            list-style-type: none;
             padding: 0;
+
         }
 
  
 
-        li {
-            margin-bottom: 5px;
+        #sidebar ul li {
+
+            margin-bottom: 10px;
+
+            text-align: center;
+
+            color: white;
+
         }
 
  
 
-        .certification {
-            font-style: italic;
-            color: #777;
-            font-size: 14px;
-            opacity: 0.5;
-            align-self: flex-end;
-            margin-top: auto;
+        #sidebar ul li a i {
+
+            opacity: 1; /* Initially visible */
+
+            transition: opacity 0.3s; /* Add transitions for smooth animation */
+
+            font-size: 24px; /* Increased icon size */
+
+            color: #fff; /* Icon color changed to white */
+
         }
 
  
 
-        /* Styling for colorful progress bars */
-        .progress-bar {
-            height: 10px; /* Reduced the height */
-            border-radius: 5px; /* Reduced the border radius */
-            margin-bottom: 5px;
-            width: 100%;
-            background-color: #e74c3c; /* Red color for the progress bar */
+        #sidebar ul li a span {
+
+            opacity: 0; /* Initially hidden */
+
+            transition: opacity 0.3s; /* Add transitions for smooth animation */
+
         }
 
  
 
-        .progress {
-            height: 100%;
-            border-radius: 5px; /* Reduced the border radius */
-            background-color: #007bff; /* Blue color for the progress */
+        #sidebar ul li:hover a span {
+
+            opacity: 1; /* Show text on hover */
+
         }
 
  
 
-        /* Styling for star ratings */
-        .star {
-            color: #f1c40f; /* Yellow color for stars */
+        #header-bar {
+
+            background-color: #333;
+
+            color: #fff;
+
+            text-align: center;
+
+            padding: 10px;
+
+            flex-grow: 1;
+
         }
-</style>
+
+ 
+
+        #main-content {
+
+            background-color: #fff;
+
+            margin: 20px;
+
+            padding: 20px;
+
+            border-radius: 5px;
+
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+            flex-grow: 2;
+
+        }
+
+ 
+
+        .language-report {
+
+            flex-basis: calc(50% - 10px); /* Two language reports in a single row */
+
+            background-color: #fff;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border: 1px solid #ddd;
+
+            border-radius: 5px;
+
+            margin-bottom: 20px;
+
+        }
+
+ 
+
+        .language-report h3 {
+
+            margin-top: 0;
+
+        }
+
+ 
+
+        .chart-container {
+
+            position: relative;
+
+            max-width: 600px; /* Adjust as needed */
+
+            margin: 20px auto;
+
+        }
+
+ 
+
+        .download-button {
+
+            margin-top: 10px;
+
+            text-align: center;
+
+        }
+
+ 
+
+        .download-button a {
+
+            display: inline-block;
+
+            padding: 10px 20px;
+
+            background-color: #007bff;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+        }
+
+ 
+
+        #statistics {
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+ 
+
+.stat-box {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background-color: #f9f9f9;
+
+    padding: 20px;
+
+    border-radius: 5px;
+
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+    margin-right: 20px;
+
+}
+
+ 
+
+    </style>
+
 </head>
-<body>
-<div class="container">
-<header>
-<img src="{% static 'img/profile.png' %}" alt="Profile Picture" class="profile-pic">
-<h1>{{ user_domain_obj.student_name }}</h1>
-</header>
-<div class="col-sm-3">
-<section>
-<h2>Personal Info</h2>
-<p>{{ user.email }} </p>
-<p>{{ user_domain_obj.phone }}</p>
-<p>{{ user_domain_obj.roll_no }}</p>
-</section>
-<section>
-<h2>Academic Information</h2>
-<ul>
-<li>{{ user_domain_obj.degree }}</li>
-<li>{{ user_domain_obj.branch_name }}</li>
-<li>Graduated: {{ user_domain_obj.batch }}</li>
-</ul>
-</section>
-</div>
-<div class="col-sm-6">
-<section>
-<h2>Suggestion/Objective</h2>
 
-<p>Highly motivated software developer with a strong foundation in Java, Python, and C++. Proven ability in problem-solving and algorithm design. Completed numerous coding assessments with a consistent score of 90% or higher. Graduated with a Bachelor of Science in Computer Science from the University of Excellence in May 2023. Seeking opportunities to apply and further enhance my skills in a challenging software development role.</p>
-</section>
-<section>
-<h2>Programming Skills</h2>
-<ul>
-<li><span class="highlight">Java</span> - Proficient </li>
-<li><span class="highlight">Python</span> - Advanced </li>
-<li><span class="highlight">C++</span> - Intermediate</li>
-<!-- Add more skills dynamically based on the user's data -->
-</ul>
-</section>
-<section>
-<h2>Coding Skill Ratings</h2>
-<ul>
-<li>Problem Solving: <span class="star">&#9733;&#9733;&#9733;&#9733;&#9734;</span></li>
-<li>Algorithm Design: <span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span></li>
-<li>Data Structures: <span class="star">&#9733;&#9733;&#9733;&#9733;&#9734;</span></li>
-<!-- Add more ratings dynamically based on the user's data -->
-</ul>
-</section>
-<section>
-<h2>Coding Capacity</h2>
-<div class="progress-bar">
-<div class="progress" style="width: 90%;"></div>
-</div>
-<p>Completed over 50 coding assessments with an average score of 90%.</p>
-</section>
-</div>
-</div>
-<p class="certification">iamneo certified during the academic year of 2020 - 2024</p>
+<body>
+
+    <div id="sidebar">
+
+        <ul>
+
+            <!-- Add icons to the sidebar links -->
+
+            <li><a href="#" id="home-link"><i class="fas fa-square-poll-horizontal"></i> <span>Dashboard</span></a></li>
+
+            <li><a href="#" id="about-link"><i class="fas fa-book-reader"></i> <span>Students coding performance</span></a></li>
+
+        </ul>
+
+    </div>
+
+ 
+
+    <div id="main-content">
+
+        <header id="header-bar">
+
+            <h1>Programming Skill Sets Report</h1>
+
+        </header>
+
+ 
+
+        <section id="statistics">
+
+            <div class="stat-box">
+
+                <h3>Top Coders</h3>
+
+                <p>50</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h3>Average Coders</h3>
+
+                <p>100</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h3>Total Students</h3>
+
+                <p>500</p>
+
+            </div>
+
+        </section>
+
+ 
+
+        <section id="language-reports">
+
+ 
+
+            <div class="language-report" id="c-report">
+
+                <h3>C Programming</h3>
+
+                <div class="chart-container">
+
+                    <canvas id="cChart"></canvas>
+
+                </div>
+
+                <div class="download-button">
+
+                    <a href="#" class="downloadLanguageData" data-chart="cChart" download="c_programming_data.xlsx">Download Excel</a>
+
+                    <input type="text" class="languageDataFileName" placeholder="File Name (e.g., c_programming_data.xlsx)">
+
+                </div>
+
+            </div>
+
+ 
+
+            <div class="language-report" id="cpp-report">
+
+                <h3>C++ Programming</h3>
+
+                <div class="chart-container">
+
+                    <canvas id="cppChart"></canvas>
+
+                </div>
+
+                <div class="download-button">
+
+                    <a href="#" class="downloadLanguageData" data-chart="cppChart" download="cpp_programming_data.xlsx">Download Excel</a>
+
+                    <input type="text" class="languageDataFileName" placeholder="File Name (e.g., cpp_programming_data.xlsx)">
+
+                </div>
+
+            </div>
+
+ 
+
+            <div class="language-report" id="java-report">
+
+                <h3>Java Programming</h3>
+
+                <div class="chart-container">
+
+                    <canvas id="javaChart"></canvas>
+
+                </div>
+
+                <div class="download-button">
+
+                    <a href="#" class="downloadLanguageData" data-chart="javaChart" download="java_programming_data.xlsx">Download Excel</a>
+
+                    <input type="text" class="languageDataFileName" placeholder="File Name (e.g., java_programming_data.xlsx)">
+
+                </div>
+
+            </div>
+
+ 
+
+            <div class="language-report" id="python-report">
+
+                <h3>Python Programming</h3>
+
+                <div class="chart-container">
+
+                    <canvas id="pythonChart"></canvas>
+
+                </div>
+
+                <div class="download-button">
+
+                    <a href="#" class="downloadLanguageData" data-chart="pythonChart" download="python_programming_data.xlsx">Download Excel</a>
+
+                    <input type="text" class="languageDataFileName" placeholder="File Name (e.g., python_programming_data.xlsx)">
+
+                </div>
+
+            </div>
+
+ 
+
+            <div class="language-report" id="dbms-report">
+
+                <h3>DBMS</h3>
+
+                <div class="chart-container">
+
+                    <canvas id="dbmsChart"></canvas>
+
+                </div>
+
+                <div class="download-button">
+
+                    <a href="#" class="downloadLanguageData" data-chart="dbmsChart" download="dbms_data.xlsx">Download Excel</a>
+
+                    <input type="text" class="languageDataFileName" placeholder="File Name (e.g., dbms_data.xlsx)">
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- New language "DSA" -->
+
+            <div class="language-report" id="dsa-report">
+
+                <h3>DSA</h3>
+
+                <div class="chart-container">
+
+                    <canvas id="dsaChart"></canvas>
+
+                </div>
+
+                <div class="download-button">
+
+                    <a href="#" class="downloadLanguageData" data-chart="dsaChart" download="dsa_programming_data.xlsx">Download Excel</a>
+
+                    <input type="text" class="languageDataFileName" placeholder="File Name (e.g., dsa_programming_data.xlsx)">
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+ 
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        // Sample data for demonstration purposes
+
+        const data = {
+
+            c: [85, 75, 80, 70, 90], // Sample data for C Programming
+
+            cpp: [70, 80, 75, 85, 65], // Sample data for C++ Programming
+
+            java: [75, 90, 85, 80, 70], // Sample data for Java Programming
+
+            python: [90, 70, 75, 80, 85], // Sample data for Python Programming
+
+            dbms: [80, 85, 75, 70, 90], // Sample data for DBMS
+
+            dsa: [65, 70, 75, 85, 80], // Sample data for DSA
+
+        };
+
+ 
+
+        // Function to create a bar chart
+
+        function createBarChart(chartId, labels, data, label) {
+
+            const ctx = document.getElementById(chartId).getContext('2d');
+
+            new Chart(ctx, {
+
+                type: 'bar',
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [{
+
+                        label: label,
+
+                        data: data,
+
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+
+                        borderColor: 'rgba(75, 192, 192, 1)',
+
+                        borderWidth: 1
+
+                    }]
+
+                },
+
+                options: {
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            max: 100
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+ 
+
+        // Populate and create charts
+
+        createBarChart('cChart', ['Mastered', 'Average', 'Below Average'], data.c, 'C Programming');
+
+        createBarChart('cppChart', ['Mastered', 'Average', 'Below Average'], data.cpp, 'C++ Programming');
+
+        createBarChart('javaChart', ['Mastered', 'Average', 'Below Average'], data.java, 'Java Programming');
+
+        createBarChart('pythonChart', ['Mastered', 'Average', 'Below Average'], data.python, 'Python Programming');
+
+        createBarChart('dbmsChart', ['Mastered', 'Average', 'Below Average'], data.dbms, 'DBMS');
+
+        createBarChart('dsaChart', ['Mastered', 'Average', 'Below Average'], data.dsa, 'DSA');
+
+    </script>
+
 </body>
-</html> 
+
+</html>
